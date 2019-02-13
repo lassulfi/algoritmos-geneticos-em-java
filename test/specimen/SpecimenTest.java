@@ -55,4 +55,12 @@ public class SpecimenTest {
 		Specimen specimen = new Specimen(volumes, prices, limit);
 		assertFalse(specimen.getChromosomes().isEmpty());
 	}
+	
+	@Test
+	public void testCalculateEvaluation() {
+		Specimen specimen = new Specimen(volumes, prices, limit);
+		specimen.evaluation();
+		assertTrue((specimen.getEvalutationGrade() >= 1.0));
+		assertTrue((specimen.getTotalVolume()>= 0.0));
+	}
 }

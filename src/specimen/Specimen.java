@@ -10,6 +10,7 @@ public class Specimen {
 	
 	private double limitVolume;
 	private double evalutationGrade;
+	private double totalVolume;
 	private int generation;
 	
 	private List<Integer> chromosomes = new ArrayList<>();
@@ -19,6 +20,7 @@ public class Specimen {
 		this.prices = prices;
 		this.limitVolume = limitVolume;
 		
+		this.totalVolume = 0.0;
 		this.evalutationGrade = 0.0;
 		this.generation = 0;
 		
@@ -29,6 +31,23 @@ public class Specimen {
 				this.chromosomes.add(1);
 			}
 		}
+	}
+	
+	public void evaluation() {
+		double grade = 0.0;
+		double volumeSum = 0.0;
+		
+		for(int i = 0; i < chromosomes.size(); i++) {
+			if(chromosomes.get(i) == 1) {
+				grade += this.prices.get(i);
+				volumeSum += this.volumes.get(i);
+			}
+		}
+		
+		if(volumeSum > this.limitVolume) grade = 1.0;
+		
+		this.evalutationGrade = grade;
+		this.totalVolume = volumeSum;
 	}
 
 	public List<Double> getVolumes() {
@@ -77,5 +96,13 @@ public class Specimen {
 
 	public void setChromosomes(List<Integer> chromosomes) {
 		this.chromosomes = chromosomes;
+	}
+
+	public double getTotalVolume() {
+		return totalVolume;
+	}
+
+	public void setTotalVolume(double totalVolume) {
+		this.totalVolume = totalVolume;
 	}
 }
