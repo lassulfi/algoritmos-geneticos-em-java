@@ -63,4 +63,15 @@ public class SpecimenTest {
 		assertTrue((specimen.getEvalutationGrade() >= 1.0));
 		assertTrue((specimen.getTotalVolume()>= 0.0));
 	}
+	
+	@Test
+	public void testExecuteCrossover() {
+		Specimen father = new Specimen(volumes, prices, limit);
+		Specimen mother = new Specimen(volumes, prices, limit);
+		
+		List<Specimen> children = father.crossover(mother);
+		System.out.println(children);
+		
+		assertEquals(children.size(), 2);
+	}
 }
