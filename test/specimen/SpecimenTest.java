@@ -74,4 +74,19 @@ public class SpecimenTest {
 		
 		assertEquals(children.size(), 2);
 	}
+	
+	@Test
+	public void testMutation() {
+		Specimen specimen = new Specimen(volumes, prices, limit);
+		List<Integer> chromossomesBeforeMutation = specimen.getChromosomes();
+		specimen.mutation(0.05);
+		List<Integer> chromossomesAfterMutation = specimen.getChromosomes();
+		
+		boolean result = true;
+		for(int i = 0; i < specimen.getChromosomes().size(); i++) {
+			result = !(chromossomesBeforeMutation.get(i) == chromossomesAfterMutation.get(i));
+		}
+		
+		assertFalse(result);
+	}
 }

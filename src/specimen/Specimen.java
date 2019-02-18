@@ -32,6 +32,7 @@ public class Specimen {
 			}
 		}
 	}
+	
 
 	public void evaluation() {
 		double grade = 0.0;
@@ -73,6 +74,18 @@ public class Specimen {
 		children.get(1).setGeneration(this.generation++);
 
 		return children;
+	}
+	
+	public Specimen mutation(double ratio) {
+		for(Integer chromosome : this.chromosomes) {
+			if(Math.random() < ratio) {
+				chromosome = 1;
+			} else {
+				chromosome = 0;
+			}
+		}
+		
+		return this;
 	}
 
 	public List<Double> getVolumes() {
