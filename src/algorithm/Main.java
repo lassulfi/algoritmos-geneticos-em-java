@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import entities.Product;
+import specimen.Specimen;
 
 public class Main {
 
@@ -25,9 +26,26 @@ public class Main {
 			new Product("Notebook Lenovo", 0.498, 1999.90),
 			new Product("Notebook Asus", 0.527, 3999.00));
 		
+		List<Double> volumes = new ArrayList<>();
+		List<Double> prices = new ArrayList<>();
+		
 		for(Product p : products) {
-			System.out.println(p);
+			volumes.add(p.getVolume());
+			prices.add(p.getPrice());
 		}
+		
+		
+		
+		double maxVolume = 3.0;
+		int populationSize = 20;
+		
+		GeneticAlgorithm ga = new GeneticAlgorithm(populationSize);
+		ga.createPopulation(volumes, prices, maxVolume);
+		
+		for(Specimen sp : ga.getPopulation()) {
+			sp.evaluation();
+		}
+		
 	}
 
 }

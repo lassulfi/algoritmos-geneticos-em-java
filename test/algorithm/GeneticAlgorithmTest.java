@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import entities.Product;
+import specimen.Specimen;
 
 public class GeneticAlgorithmTest {
 
@@ -21,7 +22,7 @@ public class GeneticAlgorithmTest {
 	List<String> names = new ArrayList<>();
 
 	double limit = 3;
-	
+
 	int populationSize = 20;
 
 	@Before
@@ -47,17 +48,50 @@ public class GeneticAlgorithmTest {
 	@Test
 	public void testGetPopulationSize() {
 		this.algorithm = new GeneticAlgorithm(populationSize);
-		
+
 		assertThat(algorithm.getPopulationSize(), CoreMatchers.is(populationSize));
 	}
-	
+
 	@Test
 	public void testCreatePopulation() {
 		this.algorithm = new GeneticAlgorithm(populationSize);
-		
+
 		this.algorithm.createPopulation(volumes, prices, limit);
-		
+
 		assertTrue(!this.algorithm.getPopulation().isEmpty());
+	}
+
+	@Test
+	public void testSortPopulation() {
+		this.algorithm = new GeneticAlgorithm(populationSize);
+
+		this.algorithm.createPopulation(volumes, prices, limit);
+
+		this.algorithm.getPopulation().forEach(sp -> sp.evaluation());
+
+		this.algorithm.sortPopulation();
+
+		Specimen best = algorithm.getPopulation().get(0);
+		Specimen worst = algorithm.getPopulation().get(populationSize - 1);
+
+		assertTrue(best.getEvalutationGrade() > worst.getEvalutationGrade());
+	}
+
+	@Test
+	public void testBestSpecimen() {
+		this.algorithm = new GeneticAlgorithm(populationSize);
+		this.algorithm.createPopulation(volumes, prices, limit);
+		this.algorithm.getPopulation().forEach(sp -> {
+			sp.evaluation();
+			algorithm.bestSpecimen(sp);
+		});
+
+		this.algorithm.sortPopulation();
+		Specimen best = algorithm.getPopulation().get(0);
+		
+		Specimen bestSelected = algorithm.getBestSolution();
+
+		assertEquals(best, bestSelected);
 	}
 
 }

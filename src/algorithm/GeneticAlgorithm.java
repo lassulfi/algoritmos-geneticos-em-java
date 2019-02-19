@@ -1,6 +1,7 @@
 package algorithm;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import specimen.Specimen;
@@ -22,6 +23,21 @@ public class GeneticAlgorithm {
 		}
 		this.bestSolution = this.population.get(0);
 
+	}
+	
+	public void sortPopulation() {
+		Collections.sort(this.population);
+	}
+	
+	/**
+	 * Indentify the best solution for the problem
+	 * 
+	 * @param specimen Specimen
+	 */
+	public void bestSpecimen(Specimen specimen) {
+		if(specimen.getEvalutationGrade() > this.bestSolution.getEvalutationGrade()) {
+			this.bestSolution = specimen;
+		}
 	}
 
 	public int getPopulationSize() {

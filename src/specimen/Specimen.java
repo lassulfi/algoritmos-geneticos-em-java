@@ -3,19 +3,19 @@ package specimen;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Specimen {
+public class Specimen implements Comparable<Specimen> {
 
 	private List<Double> volumes = new ArrayList<>(); // Store values for all volumes
 	private List<Double> prices = new ArrayList<>(); // Store values for all prices
 
-	private double limitVolume;
-	private double evalutationGrade;
-	private double totalVolume;
+	private Double limitVolume;
+	private Double evalutationGrade;
+	private Double totalVolume;
 	private int generation;
 
 	private List<Integer> chromosomes = new ArrayList<>();
 
-	public Specimen(List<Double> volumes, List<Double> prices, double limitVolume) {
+	public Specimen(List<Double> volumes, List<Double> prices, Double limitVolume) {
 		this.volumes = volumes;
 		this.prices = prices;
 		this.limitVolume = limitVolume;
@@ -104,19 +104,19 @@ public class Specimen {
 		this.prices = prices;
 	}
 
-	public double getLimitVolume() {
+	public Double getLimitVolume() {
 		return limitVolume;
 	}
 
-	public void setLimitVolume(double limitVolume) {
+	public void setLimitVolume(Double limitVolume) {
 		this.limitVolume = limitVolume;
 	}
 
-	public double getEvalutationGrade() {
+	public Double getEvalutationGrade() {
 		return evalutationGrade;
 	}
 
-	public void setEvalutationGrade(double evalutationGrade) {
+	public void setEvalutationGrade(Double evalutationGrade) {
 		this.evalutationGrade = evalutationGrade;
 	}
 
@@ -136,11 +136,11 @@ public class Specimen {
 		this.chromosomes = chromosomes;
 	}
 
-	public double getTotalVolume() {
+	public Double getTotalVolume() {
 		return totalVolume;
 	}
 
-	public void setTotalVolume(double totalVolume) {
+	public void setTotalVolume(Double totalVolume) {
 		this.totalVolume = totalVolume;
 	}
 
@@ -149,5 +149,10 @@ public class Specimen {
 		return "Specimen [volumes=" + volumes + ", prices=" + prices + ", limitVolume=" + limitVolume
 				+ ", evalutationGrade=" + evalutationGrade + ", totalVolume=" + totalVolume + ", generation="
 				+ generation + ", chromosomes=" + chromosomes + "]";
+	}
+
+	@Override
+	public int compareTo(Specimen sp) {
+		return sp.getEvalutationGrade().compareTo(this.evalutationGrade);
 	}
 }
