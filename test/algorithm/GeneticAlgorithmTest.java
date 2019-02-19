@@ -93,5 +93,21 @@ public class GeneticAlgorithmTest {
 
 		assertEquals(best, bestSelected);
 	}
+	
+	@Test
+	public void testEvaluationSum() {
+		this.algorithm = new GeneticAlgorithm(populationSize);
+		this.algorithm.createPopulation(volumes, prices, limit);
+		this.algorithm.getPopulation().forEach(sp -> sp.evaluation());
+		
+		Double evaluationSum = this.algorithm.evaluationSum();
+		
+		Double sum = 0.0;
+		for(Specimen specimen : this.algorithm.getPopulation()) {
+			sum += specimen.getEvalutationGrade();
+		}
+		
+		assertThat(evaluationSum, CoreMatchers.is(sum));
+	}
 
 }

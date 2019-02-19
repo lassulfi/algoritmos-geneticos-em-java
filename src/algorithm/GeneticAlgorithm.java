@@ -25,6 +25,9 @@ public class GeneticAlgorithm {
 
 	}
 	
+	/**
+	 * Sort the population to a desc order
+	 */
 	public void sortPopulation() {
 		Collections.sort(this.population);
 	}
@@ -38,6 +41,19 @@ public class GeneticAlgorithm {
 		if(specimen.getEvalutationGrade() > this.bestSolution.getEvalutationGrade()) {
 			this.bestSolution = specimen;
 		}
+	}
+	
+	/**
+	 * Calculates the sum of all evaluations
+	 * @return Double
+	 */
+	public Double evaluationSum() {
+		Double sum = 0.0;
+		for(Specimen specimen : this.population) {
+			sum += specimen.getEvalutationGrade();
+		}
+		
+		return sum;
 	}
 
 	public int getPopulationSize() {
