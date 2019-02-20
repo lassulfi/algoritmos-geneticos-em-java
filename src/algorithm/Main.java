@@ -33,9 +33,7 @@ public class Main {
 			volumes.add(p.getVolume());
 			prices.add(p.getPrice());
 		}
-		
-		
-		
+				
 		double maxVolume = 3.0;
 		int populationSize = 20;
 		
@@ -44,6 +42,14 @@ public class Main {
 		
 		for(Specimen sp : ga.getPopulation()) {
 			sp.evaluation();
+		}
+		
+		ga.sortPopulation();
+		ga.bestSpecimen(ga.getPopulation().get(0));
+		Double sum = ga.evaluationSum();
+		for(int i = 0; i < ga.getPopulation().size() / 2; i++) {
+			Integer father1 = ga.fatherSelection(sum);
+			Integer father2 = ga.fatherSelection(sum);
 		}
 		
 	}

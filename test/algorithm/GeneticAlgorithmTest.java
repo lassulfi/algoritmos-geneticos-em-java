@@ -109,5 +109,21 @@ public class GeneticAlgorithmTest {
 		
 		assertThat(evaluationSum, CoreMatchers.is(sum));
 	}
+	
+	@Test
+	public void testFatherSelection() {
+		this.algorithm = new GeneticAlgorithm(populationSize);
+		this.algorithm.createPopulation(volumes, prices, limit);
+		this.algorithm.getPopulation().forEach(sp -> sp.evaluation());		
+		this.algorithm.sortPopulation();
+		
+		Integer father = 0;
+		for(int i = 0; i < algorithm.getPopulation().size() /2; i++) {
+			father = this.algorithm.fatherSelection(this.algorithm.evaluationSum());
+		}
+		
+		
+		assertTrue(father > 0);
+	}
 
 }
