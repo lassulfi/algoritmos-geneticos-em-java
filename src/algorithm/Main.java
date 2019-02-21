@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jfree.ui.RefineryUtilities;
+
 import entities.Product;
 import specimen.Specimen;
+import view.Chart;
 
 public class Main {
 
@@ -45,6 +48,11 @@ public class Main {
 		}
 		builder.append(" ]");
 		System.out.println(builder.toString());
+		
+		Chart chart = new Chart("Genetic Algorithm", "Evolution of solutions", ga.getBestChromosomes());
+		chart.pack();
+		RefineryUtilities.centerFrameOnScreen(chart);
+		chart.setVisible(true);
 	}
 
 }

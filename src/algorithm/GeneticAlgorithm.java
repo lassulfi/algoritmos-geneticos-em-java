@@ -12,6 +12,7 @@ public class GeneticAlgorithm {
 	private List<Specimen> population = new ArrayList<>();
 	private int generation;
 	private Specimen bestSolution;
+	private List<Specimen> bestChromosomes = new ArrayList<>();
 
 	public GeneticAlgorithm(int populationSize) {
 		this.populationSize = populationSize;
@@ -78,6 +79,7 @@ public class GeneticAlgorithm {
 
 	public void showGeneration() {
 		Specimen best = this.population.get(0);
+		this.bestChromosomes.add(best);
 		System.out.println("G: " + best.getGeneration() + " Total Value: " + best.getEvalutationGrade()
 				+ " Total volume: " + best.getTotalVolume() + " Chromosome: " + best.getChromosomes());
 	}
@@ -152,4 +154,11 @@ public class GeneticAlgorithm {
 		this.bestSolution = bestSolution;
 	}
 
+	public List<Specimen> getBestChromosomes() {
+		return bestChromosomes;
+	}
+
+	public void setBestChromosomes(List<Specimen> bestChromosomes) {
+		this.bestChromosomes = bestChromosomes;
+	}
 }
