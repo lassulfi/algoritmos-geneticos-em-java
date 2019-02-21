@@ -121,9 +121,18 @@ public class GeneticAlgorithmTest {
 		for(int i = 0; i < algorithm.getPopulation().size() /2; i++) {
 			father = this.algorithm.fatherSelection(this.algorithm.evaluationSum());
 		}
-		
-		
+				
 		assertTrue(father > 0);
+	}
+	
+	@Test
+	public void testSolve() {
+		this.algorithm = new GeneticAlgorithm(populationSize);
+		double mutationRatio = 0.01;
+		int numberOfGenerations = 100;
+		List<Integer> solution = this.algorithm.solve(mutationRatio, numberOfGenerations, volumes, prices, limit);
+		
+		assertTrue(!solution.isEmpty());
 	}
 
 }
