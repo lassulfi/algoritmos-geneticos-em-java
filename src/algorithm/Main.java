@@ -46,7 +46,7 @@ public class Main {
 		builder.append(" ]");
 		System.out.println(builder.toString());
 		
-		Chart chart = new Chart("Genetic Algorithm", "Evolution of solutions", ga.getBestChromosomes());
+		Chart<Specimen> chart = new Chart<>("Genetic Algorithm", "Evolution of solutions", ga.getBestChromosomes());
 		chart.pack();
 		RefineryUtilities.centerFrameOnScreen(chart);
 		chart.setVisible(true);

@@ -1,5 +1,7 @@
 package view;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +11,15 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
+import org.jgap.IChromosome;
 
 import specimen.Specimen;
 
-public class Chart extends ApplicationFrame {
+public class Chart<T> extends ApplicationFrame {
 
-	private List<Specimen> bestChromosomes = new ArrayList<>();
+	private List<T> bestChromosomes = new ArrayList<>();
 
-	public Chart(String WindowTitle, String chartTitle, List<Specimen> bestChromosomes) {
+	public Chart(String WindowTitle, String chartTitle, List<T> bestChromosomes) {
 		super(WindowTitle);
 		this.bestChromosomes = bestChromosomes;
 		JFreeChart lineChart = ChartFactory.createLineChart(chartTitle, "Generation", "Total Value", loadData(),
@@ -29,7 +32,15 @@ public class Chart extends ApplicationFrame {
 	private DefaultCategoryDataset loadData() {
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 		for (int i = 0; i < bestChromosomes.size(); i++) {
-			dataSet.addValue(bestChromosomes.get(i).getEvalutationGrade(), "Best solution", "" + i);
+			if(bestChromosomes.get(i) instanceof Specimen) {
+				Specimen specimen = (Specimen) bestChromosomes.get(i);
+				dataSet.addValue(specimen.getEvalutationGrade(), "Best solution", "" + i);
+			}
+			if(bestChromosomes.get(i) instanceof IChromosome) {
+				IChromosome chromosome = (IChromosome) bestChromosomes.get(i);
+				dataSet.addValue(chromosome.getFitnessValue(), "Best solution", "" + i);
+			}
+			
 		}
 
 		return dataSet;
